@@ -2,6 +2,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import Icon from "@/components/ui/icon"
+import { useProfile } from "@/hooks/useProfile"
 
 type Task = {
   id: number
@@ -84,6 +85,7 @@ const gradeEmojis: Record<Grade, string> = {
 }
 
 export function DemoSection() {
+  const { addResult } = useProfile()
   const [selectedGrade, setSelectedGrade] = useState<Grade | null>(null)
   const [current, setCurrent] = useState(0)
   const [answerState, setAnswerState] = useState<AnswerState>("idle")
@@ -94,6 +96,13 @@ export function DemoSection() {
   const tasks = selectedGrade ? tasksByGrade[selectedGrade] : []
   const task = tasks[current]
 
+  const topicByGrade: Record<Grade, string> = {
+    1: "Буквы и звуки",
+    2: "ЖИ-ШИ, безударные гласные",
+    3: "Части речи и предложения",
+    4: "Части речи и предложения",
+  }
+
   const handleAnswer = (answer: string) => {
     if (answerState !== "idle") return
     const correct = answer.trim().toLowerCase() === task.answer.toLowerCase()
@@ -102,8 +111,15 @@ export function DemoSection() {
     setTimeout(() => {
       setAnswerState("idle")
       setInputValue("")
-      if (current + 1 >= tasks.length) setFinished(true)
-      else setCurrent((c) => c + 1)
+      const nextIndex = current + 1
+      if (nextIndex >= tasks.length) {
+        if (selectedGrade) {
+          addResult(selectedGrade, topicByGrade[selectedGrade], correct ? score + 1 : score, tasks.length)
+        }
+        setFinished(true)
+      } else {
+        setCurrent(nextIndex)
+      }
     }, 1800)
   }
 
