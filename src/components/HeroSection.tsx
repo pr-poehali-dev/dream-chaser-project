@@ -1,6 +1,6 @@
 import { ShinyButton } from "@/components/ui/shiny-button"
-import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
+import Icon from "@/components/ui/icon"
 
 export function HeroSection() {
   return (
@@ -11,8 +11,8 @@ export function HeroSection() {
           className="absolute inset-0 opacity-50"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgb(59 130 246 / 0.15) 1px, transparent 1px),
-              linear-gradient(to bottom, rgb(59 130 246 / 0.15) 1px, transparent 1px)
+              linear-gradient(to right, rgb(139 92 246 / 0.15) 1px, transparent 1px),
+              linear-gradient(to bottom, rgb(139 92 246 / 0.15) 1px, transparent 1px)
             `,
             backgroundSize: "40px 40px",
             maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 0%, transparent 100%)",
@@ -24,22 +24,41 @@ export function HeroSection() {
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Left Column - Content */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-semibold mb-6">
+            <span>🦔</span>
+            <span>Для учеников 1–4 классов</span>
+          </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance mb-6 font-display">
-            Быстрый путь к финансированию SaaS и оборудования
+            Русский язык — легко и с удовольствием!
           </h1>
 
           <p className="text-lg text-muted-foreground text-balance mb-8 leading-relaxed max-w-xl">
-            Выберите LaunchPad как финансового партнера, чтобы закрывать сделки быстрее и увеличить доход. Одобряйте
-            клиентов, настраивайте предложения и выигрывайте сделки за минуты.
+            «Буквоёжка» — развивающая программа с сотнями заданий по русскому языку. Ребёнок учится играя, а родители видят прогресс в любой момент.
           </p>
 
-          <ShinyButton className="text-base px-8">
-            Записаться на звонок
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </ShinyButton>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <ShinyButton className="text-base px-8">
+              Начать бесплатно
+              <Icon name="ArrowRight" className="ml-2 h-4 w-4" />
+            </ShinyButton>
+            <button className="text-base px-8 py-2.5 rounded-lg border border-border hover:border-primary/50 transition-colors text-muted-foreground hover:text-foreground font-medium">
+              Посмотреть задания
+            </button>
+          </div>
+
+          <div className="flex items-center gap-6 mt-8">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Icon name="CheckCircle2" className="h-4 w-4 text-primary" />
+              <span>Первые 7 дней бесплатно</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Icon name="CheckCircle2" className="h-4 w-4 text-primary" />
+              <span>Без рекламы</span>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Right Column - Chat Interface Mockup */}
+        {/* Right Column - Task Preview */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -47,78 +66,45 @@ export function HeroSection() {
           className="relative"
         >
           <div className="space-y-4">
-            {/* Buyer Message */}
-            <div className="flex flex-col items-end gap-2">
-              <span className="text-sm text-muted-foreground">Клиент</span>
-              <div className="bg-card border border-border rounded-2xl px-6 py-4 max-w-md shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg
-                      className="w-4 h-4 text-primary"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-foreground">Привет, можно платить помесячно?</p>
-                </div>
+            {/* Task card */}
+            <div className="bg-card border border-border rounded-2xl px-6 py-5 shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-lg">📝</div>
+                <span className="text-sm font-semibold text-primary">Задание 1 из 10</span>
+              </div>
+              <p className="text-sm font-medium mb-4">Вставь пропущенную букву:</p>
+              <p className="text-xl font-bold font-display mb-4">
+                М<span className="border-b-2 border-primary px-1 mx-0.5">_</span>локо
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {["а", "о", "е"].map((letter) => (
+                  <button
+                    key={letter}
+                    className="py-2 rounded-xl border border-border hover:border-primary hover:bg-primary/5 transition-all text-center font-bold text-lg font-display"
+                  >
+                    {letter}
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Vendor Message */}
-            <div className="flex flex-col items-end gap-2">
-              <span className="text-sm text-muted-foreground">Продавец</span>
-              <div className="bg-primary text-primary-foreground rounded-2xl px-6 py-4 max-w-md shadow-sm">
-                <p className="text-sm">Конечно, вот предложение: launchpad.ru/73d6</p>
+            {/* Progress card */}
+            <div className="bg-card border border-border rounded-2xl px-6 py-4 shadow-sm">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold">Прогресс Маши</span>
+                <span className="text-sm text-primary font-bold">7 из 10 ⭐</span>
+              </div>
+              <div className="h-2.5 bg-muted rounded-full overflow-hidden">
+                <div className="h-full w-[70%] bg-primary rounded-full" />
               </div>
             </div>
 
-            {/* LaunchPad Message 1 */}
-            <div className="flex flex-col items-end gap-2">
-              <span className="text-sm text-muted-foreground">LaunchPad</span>
-              <div className="bg-card border border-border rounded-2xl px-6 py-4 max-w-md shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg
-                      className="w-4 h-4 text-accent-foreground"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-foreground">ИИ-каталог принял предложение</p>
-                </div>
-              </div>
-            </div>
-
-            {/* LaunchPad Message 2 */}
-            <div className="flex flex-col items-end gap-2">
-              <span className="text-sm text-muted-foreground">LaunchPad</span>
-              <div className="bg-card border border-border rounded-2xl px-6 py-4 max-w-md shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg
-                      className="w-4 h-4 text-accent-foreground"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-foreground">ИИ-каталог создал ссылку на оплату</p>
-                </div>
+            {/* Badge */}
+            <div className="bg-accent/20 border border-accent/30 rounded-2xl px-6 py-4 shadow-sm flex items-center gap-3">
+              <span className="text-2xl">🏆</span>
+              <div>
+                <p className="text-sm font-bold">Молодец! Получена медаль</p>
+                <p className="text-xs text-muted-foreground">«Знаток гласных букв»</p>
               </div>
             </div>
           </div>

@@ -1,38 +1,38 @@
 import { motion } from "framer-motion"
-import { CreditCard, TrendingUp, Zap, Brain, Activity, CheckCircle2, ArrowUpRight, BarChart3 } from "lucide-react"
+import { CheckCircle2, ArrowUpRight } from "lucide-react"
 import { Card } from "@/components/ui/card"
+import Icon from "@/components/ui/icon"
 
 export function HowItWorksSection() {
   const steps = [
     {
-      icon: CreditCard,
-      title: "Подключите инструменты",
+      iconName: "UserPlus",
+      title: "Зарегистрируйтесь",
       description:
-        "Интегрируйтесь с текущим рабочим процессом за минуты. Наша платформа легко соединяется с инструментами, которые вы используете каждый день.",
+        "Создайте аккаунт за 1 минуту. Укажите класс ребёнка, и программа автоматически подберёт подходящие задания по русскому языку.",
       visual: (
         <div className="h-[280px] flex items-center justify-center">
           <Card className="w-full p-6 bg-gradient-to-br from-primary/20 to-primary/5 border-primary/20">
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                    <CreditCard className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Бизнес-тариф</p>
-                    <p className="text-sm text-muted-foreground">Премиум доступ</p>
-                  </div>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-2xl">🦔</span>
+                <div>
+                  <p className="font-bold font-display">Привет! Я Ёжик</p>
+                  <p className="text-sm text-muted-foreground">Буду помогать учиться</p>
                 </div>
-                <p className="font-bold text-lg">4 500 000 ₽</p>
               </div>
               <div className="space-y-2">
-                <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
-                  <span className="text-sm">Помесячно</span>
-                  <span className="text-sm font-medium">375 000 ₽/мес</span>
+                <div className="p-3 bg-background/50 rounded-xl border border-primary/10">
+                  <p className="text-xs text-muted-foreground mb-1">Имя ребёнка</p>
+                  <p className="text-sm font-semibold">Маша</p>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
-                  <span className="text-sm">Поквартально</span>
-                  <span className="text-sm font-medium">1 125 000 ₽/кв</span>
+                <div className="p-3 bg-background/50 rounded-xl border border-primary/10">
+                  <p className="text-xs text-muted-foreground mb-1">Класс</p>
+                  <p className="text-sm font-semibold">2 класс</p>
+                </div>
+                <div className="flex items-center gap-2 p-3 bg-primary/10 rounded-xl">
+                  <CheckCircle2 className="w-4 h-4 text-primary" />
+                  <p className="text-sm font-medium text-primary">Программа готова!</p>
                 </div>
               </div>
             </div>
@@ -41,115 +41,67 @@ export function HowItWorksSection() {
       ),
     },
     {
-      icon: TrendingUp,
-      title: "ИИ-автоматизация",
+      iconName: "BookOpen",
+      title: "Выполняйте задания",
       description:
-        "Позвольте интеллектуальной системе взять на себя рутину. Автоматизируйте повторяющиеся задачи и сфокусируйтесь на главном для бизнеса.",
+        "Каждый день — новые упражнения на правила, диктанты и работу над ошибками. Задания разнообразные и интересные — ребёнок не заскучает.",
       visual: (
         <div className="h-[280px] flex items-center justify-center">
           <Card className="w-full p-6 bg-gradient-to-br from-primary/20 to-primary/5 border-primary/20">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Brain className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-semibold">ИИ-ассистент</span>
-                </div>
-                <div className="flex items-center gap-1 text-xs text-green-500">
-                  <Activity className="w-3 h-3" />
-                  <span>Активен</span>
-                </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-sm font-semibold">Сегодняшние задания</p>
+                <span className="text-xs text-primary font-bold">2/5 выполнено</span>
               </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3 p-3 bg-background/50 rounded-lg">
-                  <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium">Обработка счетов</p>
-                    <p className="text-xs text-muted-foreground">Обработано 247 счетов</p>
+              {[
+                { title: "Безударные гласные", done: true },
+                { title: "Парные согласные", done: true },
+                { title: "Мягкий знак", done: false },
+                { title: "Разделительный ъ", done: false },
+              ].map((item) => (
+                <div key={item.title} className="flex items-center gap-3 p-2.5 bg-background/50 rounded-xl">
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${item.done ? "bg-primary" : "bg-border"}`}>
+                    {item.done && <CheckCircle2 className="w-3 h-3 text-white" />}
                   </div>
+                  <p className={`text-sm ${item.done ? "line-through text-muted-foreground" : "font-medium"}`}>{item.title}</p>
                 </div>
-
-                <div className="flex items-start gap-3 p-3 bg-background/50 rounded-lg">
-                  <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium">Онбординг клиентов</p>
-                    <p className="text-xs text-muted-foreground">Создано 32 аккаунта</p>
-                  </div>
-                </div>
-
-
-              </div>
-
-              <div className="pt-2 border-t border-primary/10">
-                <p className="text-xs text-muted-foreground">
-                  Сэкономлено за неделю: <span className="text-primary font-semibold">18,5 часов</span>
-                </p>
-              </div>
+              ))}
             </div>
           </Card>
         </div>
       ),
     },
     {
-      icon: Zap,
-      title: "Масштабируйтесь уверенно",
+      iconName: "Trophy",
+      title: "Получайте награды",
       description:
-        "Закрывайте быстрые сделки за минуты, а не недели. Платформа создана для вашего роста без потери скорости и надежности.",
+        "За правильные ответы ребёнок зарабатывает звёзды и медали. Следите за успехами и отмечайте достижения вместе с ребёнком!",
       visual: (
         <div className="h-[280px] flex items-center justify-center">
           <Card className="w-full p-6 bg-gradient-to-br from-primary/20 to-primary/5 border-primary/20">
             <div className="space-y-4">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <BarChart3 className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-semibold">Метрики роста</span>
-                </div>
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-sm font-semibold">Достижения Маши</p>
                 <div className="flex items-center gap-1 text-xs text-green-500">
                   <ArrowUpRight className="w-3 h-3" />
-                  <span>+24%</span>
+                  <span>+3 сегодня</span>
                 </div>
               </div>
-
-              <div className="space-y-3">
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">Объем транзакций</span>
-                    <span className="font-semibold">240 млн ₽</span>
+              <div className="grid grid-cols-3 gap-2">
+                {["🏆", "⭐", "📚", "🎯", "🦔", "✨"].map((emoji, i) => (
+                  <div key={i} className={`p-3 rounded-xl text-center text-2xl ${i < 4 ? "bg-primary/10" : "bg-background/30 opacity-40"}`}>
+                    {emoji}
                   </div>
-                  <div className="h-2 bg-background/50 rounded-full overflow-hidden">
-                    <div className="h-full w-[85%] bg-primary rounded-full" />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">Активные сделки</span>
-                    <span className="font-semibold">156</span>
-                  </div>
-                  <div className="h-2 bg-background/50 rounded-full overflow-hidden">
-                    <div className="h-full w-[72%] bg-primary rounded-full" />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">Среднее время закрытия</span>
-                    <span className="font-semibold">4,2 дня</span>
-                  </div>
-                  <div className="h-2 bg-background/50 rounded-full overflow-hidden">
-                    <div className="h-full w-[95%] bg-primary rounded-full" />
-                  </div>
-                </div>
+                ))}
               </div>
-
               <div className="pt-2 border-t border-primary/10 grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-muted-foreground">Успешность</p>
-                  <p className="text-lg font-bold text-primary">94%</p>
+                  <p className="text-xs text-muted-foreground">Звёзд собрано</p>
+                  <p className="text-lg font-bold text-primary">142 ⭐</p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground">Аптайм</p>
-                  <p className="text-lg font-bold text-primary">99,9%</p>
+                  <p className="text-xs text-muted-foreground">Серия дней</p>
+                  <p className="text-lg font-bold text-primary">7 🔥</p>
                 </div>
               </div>
             </div>
@@ -160,7 +112,7 @@ export function HowItWorksSection() {
   ]
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background" id="how-it-works">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -169,9 +121,9 @@ export function HowItWorksSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">Как это работает</h2>
+          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">Как работает программа</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Начните за три простых шага и трансформируйте рабочий процесс
+            Три простых шага — и ребёнок уже занимается русским языком
           </p>
         </motion.div>
 
@@ -188,10 +140,13 @@ export function HowItWorksSection() {
               <div className="mb-6">{step.visual}</div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <step.icon className="w-5 h-5 text-primary" />
+                  <Icon name={step.iconName} className="h-5 w-5 text-primary" fallback="BookOpen" />
                 </div>
-                <h3 className="text-xl font-bold font-display">{step.title}</h3>
+                <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">
+                  {index + 1}
+                </div>
               </div>
+              <h3 className="text-xl font-bold font-display mb-3">{step.title}</h3>
               <p className="text-muted-foreground leading-relaxed">{step.description}</p>
             </motion.div>
           ))}

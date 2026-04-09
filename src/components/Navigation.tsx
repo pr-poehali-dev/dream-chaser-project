@@ -12,18 +12,19 @@ export function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
-            <a href="/" className="text-xl font-bold font-display">
-              LaunchPad
+            <a href="/" className="text-xl font-bold font-display flex items-center gap-2">
+              <span className="text-2xl">🦔</span>
+              <span className="text-primary">Буквоёжка</span>
             </a>
             <div className="hidden md:flex items-center gap-6">
               <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Возможности
+                Программа
+              </a>
+              <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Как работает
               </a>
               <a href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Тарифы
-              </a>
-              <a href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                О нас
               </a>
             </div>
           </div>
@@ -31,7 +32,7 @@ export function Navigation() {
             <ShinyButton variant="secondary" className="hidden sm:inline-flex">
               Войти
             </ShinyButton>
-            <ShinyButton>Начать</ShinyButton>
+            <ShinyButton>Попробовать бесплатно</ShinyButton>
           </div>
         </div>
       </div>

@@ -5,29 +5,29 @@ import { Button } from "@/components/ui/button"
 const slides = [
   {
     id: 1,
-    title: "Поставщики",
+    title: "Задания по правилам",
     description:
-      "Получайте оплату сразу, предоставьте клиентам гибкие платежи и оставьте заботу о сборе платежей нам. Партнерский канал одобрен.",
+      "Более 200 упражнений на ключевые правила русского языка: безударные гласные, парные согласные, мягкий знак, заглавные буквы и другие темы по программе 1–4 класса.",
     image: "/placeholder.svg?height=400&width=600",
   },
   {
     id: 2,
-    title: "Реселлеры",
-    description: "Сократите закрытие сделок с недель до минут благодаря простому финансированию и быстрым выплатам.",
+    title: "Диктанты и тексты",
+    description: "Интерактивные диктанты с голосовым озвучиванием, работа над ошибками с подсказками и объяснениями. Ребёнок сразу понимает, где и почему ошибся.",
     image: "/placeholder.svg?height=400&width=600",
   },
   {
     id: 3,
-    title: "Покупатели",
+    title: "Словарные слова",
     description:
-      "Дайте клиентам доступ к технологиям и услугам, которые им нужны для успеха, с гибкими вариантами оплаты.",
+      "Специальный тренажёр для запоминания словарных слов с карточками, анимациями и повторениями по методу интервального запоминания.",
     image: "/placeholder.svg?height=400&width=600",
   },
   {
     id: 4,
-    title: "Бизнес-решения",
+    title: "Разбор по составу",
     description:
-      "Масштабируйте бизнес с решениями корпоративного уровня, индивидуальными условиями и поддержкой для крупных сделок.",
+      "Интерактивные задания на разбор слов по составу, определение частей речи и членов предложения — с наглядными схемами и подсказками.",
     image: "/placeholder.svg?height=400&width=600",
   },
 ]
@@ -43,7 +43,6 @@ export function FeaturesSlideshowSection() {
     setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length)
   }
 
-  // Calculate which slides to show (current + next 1 or 2 depending on screen size)
   const getVisibleSlides = () => {
     const visible = []
     for (let i = 0; i < 3; i++) {
@@ -57,7 +56,7 @@ export function FeaturesSlideshowSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-start justify-between mb-12">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-balance max-w-2xl">
-            Выигрыш для бизнеса, партнеров и клиентов
+            Всё, что нужно для отличных оценок
           </h2>
           <div className="flex gap-2">
             <Button
@@ -97,7 +96,6 @@ export function FeaturesSlideshowSection() {
           </div>
         </div>
 
-        {/* Slide indicators */}
         <div className="flex justify-center gap-2 mt-8">
           {slides.map((_, idx) => (
             <button
