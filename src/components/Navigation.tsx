@@ -1,7 +1,9 @@
 import { ShinyButton } from "@/components/ui/shiny-button"
 import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 
 export function Navigation() {
+  const navigate = useNavigate()
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
@@ -26,9 +28,13 @@ export function Navigation() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <ShinyButton variant="secondary" className="hidden sm:inline-flex">
-              Войти
-            </ShinyButton>
+            <button
+              onClick={() => navigate("/profile")}
+              className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-2 rounded-lg hover:bg-muted"
+            >
+              <span className="text-lg">🦔</span>
+              Профиль
+            </button>
             <ShinyButton>Попробовать бесплатно</ShinyButton>
           </div>
         </div>
