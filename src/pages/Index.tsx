@@ -5,6 +5,7 @@ import { HowItWorksSection } from "@/components/HowItWorksSection"
 import { FeaturesSection } from "@/components/FeaturesSection"
 import { FeaturesSlideshowSection } from "@/components/FeaturesSlideshowSection"
 import { TestimonialsSection } from "@/components/TestimonialsSection"
+import { DemoSection } from "@/components/DemoSection"
 import { FAQSection } from "@/components/FAQSection"
 
 export default function Index() {
@@ -18,6 +19,7 @@ export default function Index() {
         <HowItWorksSection />
         <FeaturesSlideshowSection />
         <TestimonialsSection />
+        <DemoSection />
         <FAQSection />
       </main>
       <footer className="border-t border-border py-12 mt-20">
