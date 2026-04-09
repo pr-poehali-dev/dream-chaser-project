@@ -265,6 +265,60 @@ export function DemoSection() {
                     <p className="text-center text-sm text-muted-foreground mb-5">💡 {task.hint}</p>
                   )}
 
+                  {/* Hedgehog reaction */}
+                  <div className="flex justify-center mb-3">
+                    <AnimatePresence mode="wait">
+                      {answerState === "idle" && (
+                        <motion.div
+                          key="idle"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.8 }}
+                          className="flex flex-col items-center gap-1"
+                        >
+                          <motion.span
+                            animate={{ y: [0, -4, 0] }}
+                            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                            className="text-5xl"
+                          >🦔</motion.span>
+                          <span className="text-xs text-muted-foreground">Думаю...</span>
+                        </motion.div>
+                      )}
+                      {answerState === "correct" && (
+                        <motion.div
+                          key="correct"
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: [1.2, 1] }}
+                          exit={{ opacity: 0 }}
+                          className="flex flex-col items-center gap-1"
+                        >
+                          <motion.span
+                            animate={{ rotate: [0, -10, 10, -10, 0] }}
+                            transition={{ duration: 0.5 }}
+                            className="text-5xl"
+                          >🦔</motion.span>
+                          <span className="text-xs font-semibold text-green-600">Молодец! ✅</span>
+                        </motion.div>
+                      )}
+                      {answerState === "wrong" && (
+                        <motion.div
+                          key="wrong"
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="flex flex-col items-center gap-1"
+                        >
+                          <motion.span
+                            animate={{ x: [0, -6, 6, -6, 0] }}
+                            transition={{ duration: 0.4 }}
+                            className="text-5xl"
+                          >🦔</motion.span>
+                          <span className="text-xs font-semibold text-red-500">Не верно, попробуй ещё! ❌</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
                   {/* Feedback */}
                   <AnimatePresence>
                     {answerState !== "idle" && (
@@ -276,7 +330,6 @@ export function DemoSection() {
                           answerState === "correct" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
                         }`}
                       >
-                        {answerState === "correct" ? "✅ " : "❌ "}
                         {task.explanation}
                       </motion.div>
                     )}
