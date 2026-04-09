@@ -37,11 +37,14 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <ShinyButton className="text-base px-8">
+            <ShinyButton className="text-base px-8" onClick={() => document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" })}>
               Начать бесплатно
               <Icon name="ArrowRight" className="ml-2 h-4 w-4" />
             </ShinyButton>
-            <button className="text-base px-8 py-2.5 rounded-lg border border-border hover:border-primary/50 transition-colors text-muted-foreground hover:text-foreground font-medium">
+            <button
+              onClick={() => document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" })}
+              className="text-base px-8 py-2.5 rounded-lg border border-border hover:border-primary/50 transition-colors text-muted-foreground hover:text-foreground font-medium"
+            >
               Посмотреть задания
             </button>
           </div>
