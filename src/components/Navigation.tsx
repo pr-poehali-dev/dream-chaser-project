@@ -35,7 +35,7 @@ export function Navigation() {
               <span className="text-lg">🦔</span>
               Профиль
             </button>
-            <ShinyButton>Попробовать бесплатно</ShinyButton>
+            <ShinyButton onClick={() => document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" })}>Попробовать демо</ShinyButton>
           </div>
         </div>
       </div>
