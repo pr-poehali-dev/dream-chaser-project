@@ -52,10 +52,6 @@ export function HeroSection() {
           <div className="flex items-center gap-6 mt-8">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Icon name="CheckCircle2" className="h-4 w-4 text-primary" />
-              <span>Первые 7 дней бесплатно</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Icon name="CheckCircle2" className="h-4 w-4 text-primary" />
               <span>Без рекламы</span>
             </div>
           </div>
