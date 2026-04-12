@@ -20,7 +20,7 @@ function ScoreBadge({ score, total }: { score: number; total: number }) {
 
 export default function ProfilePage() {
   const navigate = useNavigate()
-  const { history, totalScore, totalTasks, accuracy, streak, clearHistory } = useProfile()
+  const { history, stars, totalScore, totalTasks, accuracy, streak, clearHistory } = useProfile()
   const [activeTab, setActiveTab] = useState<"history" | "medals">("history")
 
   const medals = [
@@ -55,11 +55,16 @@ export default function ProfilePage() {
         {/* Profile header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="flex items-center gap-5 mb-8">
           <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-5xl shrink-0">🦔</div>
-          <div>
+          <div className="flex-1">
             <h1 className="text-2xl font-bold font-display">Мой профиль</h1>
             <p className="text-muted-foreground text-sm">
               {history.length > 0 ? `${history.length} заданий выполнено` : "Ещё нет выполненных заданий"}
             </p>
+          </div>
+          <div className="flex flex-col items-center gap-1 px-5 py-3 rounded-2xl bg-amber-50 border border-amber-200">
+            <span className="text-3xl">⭐</span>
+            <span className="text-2xl font-bold font-display text-amber-500">{stars}</span>
+            <span className="text-xs text-amber-600 font-medium">звёзд</span>
           </div>
         </motion.div>
 

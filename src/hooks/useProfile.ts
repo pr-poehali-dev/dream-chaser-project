@@ -13,6 +13,7 @@ export type HistoryEntry = {
 }
 
 const STORAGE_KEY = "bukvoezhka_history"
+const STARS_KEY = "bukvoezhka_stars"
 
 function loadHistory(): HistoryEntry[] {
   try {
@@ -27,8 +28,17 @@ function saveHistory(history: HistoryEntry[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(history))
 }
 
+function loadStars(): number {
+  return parseInt(localStorage.getItem(STARS_KEY) || "0", 10)
+}
+
+function saveStars(stars: number) {
+  localStorage.setItem(STARS_KEY, String(stars))
+}
+
 export function useProfile() {
   const [history, setHistory] = useState<HistoryEntry[]>(loadHistory)
+  const [stars, setStars] = useState<number>(loadStars)
 
   const addResult = useCallback((grade: Grade, topic: string, score: number, total: number) => {
     const now = new Date()
@@ -46,11 +56,27 @@ export function useProfile() {
       saveHistory(updated)
       return updated
     })
+    setStars((prev) => {
+      const bonus = score >= total ? score + 3 : score
+      const updated = prev + bonus
+      saveStars(updated)
+      return updated
+    })
+  }, [])
+
+  const addStar = useCallback(() => {
+    setStars((prev) => {
+      const updated = prev + 1
+      saveStars(updated)
+      return updated
+    })
   }, [])
 
   const clearHistory = useCallback(() => {
     setHistory([])
+    setStars(0)
     localStorage.removeItem(STORAGE_KEY)
+    localStorage.removeItem(STARS_KEY)
   }, [])
 
   const totalScore = history.reduce((a, b) => a + b.score, 0)
@@ -75,5 +101,5 @@ export function useProfile() {
     return count
   })()
 
-  return { history, addResult, clearHistory, totalScore, totalTasks, accuracy, streak }
+  return { history, stars, addResult, addStar, clearHistory, totalScore, totalTasks, accuracy, streak }
 }

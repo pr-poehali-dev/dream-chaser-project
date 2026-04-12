@@ -85,13 +85,14 @@ const gradeEmojis: Record<Grade, string> = {
 }
 
 export function DemoSection() {
-  const { addResult } = useProfile()
+  const { addResult, addStar, stars } = useProfile()
   const [selectedGrade, setSelectedGrade] = useState<Grade | null>(null)
   const [current, setCurrent] = useState(0)
   const [answerState, setAnswerState] = useState<AnswerState>("idle")
   const [inputValue, setInputValue] = useState("")
   const [score, setScore] = useState(0)
   const [finished, setFinished] = useState(false)
+  const [starPop, setStarPop] = useState(false)
 
   const tasks = selectedGrade ? tasksByGrade[selectedGrade] : []
   const task = tasks[current]
@@ -106,7 +107,12 @@ export function DemoSection() {
   const handleAnswer = (answer: string) => {
     if (answerState !== "idle") return
     const correct = answer.trim().toLowerCase() === task.answer.toLowerCase()
-    if (correct) setScore((s) => s + 1)
+    if (correct) {
+      setScore((s) => s + 1)
+      addStar()
+      setStarPop(true)
+      setTimeout(() => setStarPop(false), 800)
+    }
     setAnswerState(correct ? "correct" : "wrong")
     setTimeout(() => {
       setAnswerState("idle")
@@ -257,7 +263,32 @@ export function DemoSection() {
                       <Icon name="ChevronLeft" className="h-3 w-3" />
                       {gradeLabels[selectedGrade]}
                     </button>
-                    <span className="text-sm text-muted-foreground">{current + 1} / {tasks.length}</span>
+                    <div className="flex items-center gap-3">
+                      <div className="relative flex items-center gap-1 text-sm font-bold text-amber-500">
+                        <AnimatePresence>
+                          {starPop && (
+                            <motion.span
+                              key="pop"
+                              initial={{ opacity: 1, y: 0, scale: 1 }}
+                              animate={{ opacity: 0, y: -28, scale: 1.5 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.7 }}
+                              className="absolute -top-1 left-1/2 -translate-x-1/2 text-base pointer-events-none"
+                            >
+                              +⭐
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                        <motion.span
+                          key={stars}
+                          initial={{ scale: 1.4 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", stiffness: 400 }}
+                        >⭐</motion.span>
+                        <span>{stars}</span>
+                      </div>
+                      <span className="text-sm text-muted-foreground">{current + 1} / {tasks.length}</span>
+                    </div>
                   </div>
 
                   {/* Progress bar */}
